@@ -4,7 +4,7 @@ import { sidebarLinks } from "@/constants";
 import { usePathname } from "next/navigation";
 import SideBarFooter from "@/components/SideBarFooter";
 
-const SideBar = ({ name, email } : { name : string, email: string}) => {
+const SideBar = ({ user } : { user : User }) => {
     const pathname = usePathname();
 
     return (
@@ -26,7 +26,7 @@ const SideBar = ({ name, email } : { name : string, email: string}) => {
                 })}
             </div>
 
-            <SideBarFooter name={name} email={email} />
+            <SideBarFooter user={user} />
         </section>
     )
 }

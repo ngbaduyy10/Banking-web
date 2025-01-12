@@ -7,7 +7,7 @@ import { sidebarLinks } from "@/constants";
 import { usePathname } from "next/navigation";
 import SideBarFooter from "@/components/SideBarFooter";
 
-const SideBarSheet = ({ name, email } : { name : string, email: string}) => {
+const SideBarSheet = ({ user } : { user : User }) => {
     const pathname = usePathname();
 
     return (
@@ -38,7 +38,7 @@ const SideBarSheet = ({ name, email } : { name : string, email: string}) => {
                     </div>
                 </div>
 
-                <SideBarFooter name={name} email={email} />
+                <SideBarFooter user={user} />
             </SheetContent>
         </Sheet>
     )

@@ -16,11 +16,11 @@ export default async function RootLayout({
 
     return (
         <main className="flex h-screen w-full font-inter">
-            <SideBar name={user.name} email={user.email} />
+            <SideBar user={user} />
             <div className="flex size-full flex-col">
                 <div className="root-layout">
                     <span className="text-[20px] font-ibm-plex-serif font-bold text-black-1 text-left">Bright</span>
-                    <SideBarSheet name={user.name} email={user.email} />
+                    <SideBarSheet user={user} />
                 </div>
                 {children}
             </div>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Plus } from "lucide-react";
 
-const RightSideBar = ({ name, email } : { name: string; email: string}) => {
+const RightSideBar = ({ user } : { user : User}) => {
 
     return (
         <div className="right-sidebar">
@@ -9,14 +9,14 @@ const RightSideBar = ({ name, email } : { name: string; email: string}) => {
                 <div className="profile-banner" />
                 <div className="profile">
                     <div className="profile-img">
-                        {name[0]}
+                        {user.firstName[0]}
                     </div>
                     <div className="profile-details">
                         <div className="profile-name">
-                            {name}
+                            {user.firstName} {user.lastName}
                         </div>
                         <div className="profile-email">
-                            {email}
+                            {user.email}
                         </div>
                     </div>
                 </div>

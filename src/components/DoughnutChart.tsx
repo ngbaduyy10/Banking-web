@@ -9,12 +9,12 @@ import {
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const DoughnutChart = () => {
+const DoughnutChart = ({ accounts } : { accounts : Account[]}) => {
     const data = {
-        labels: ["Red", "Blue", "Yellow"],
+        labels: accounts.map((account) => account.name),
         datasets: [
             {
-                data: [300, 50, 100],
+                data: accounts.map((account) => account.currentBalance),
                 backgroundColor: ['#0747b6', '#2265d8', '#2f91fa'],
                 hoverBackgroundColor: ['#0747b6', '#2265d8', '#2f91fa'],
             },

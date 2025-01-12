@@ -1,14 +1,17 @@
 import HeaderBox from "@/components/HeaderBox";
 import TotalBalanceBox from "@/components/TotalBalanceBox";
 import RightSideBar from "@/components/RightSideBar";
-import {getLoggedInUser} from "@/lib/actions/user.action";
+import {getAccounts, getLoggedInUser} from "@/lib/actions/user.action";
 import {redirect} from "next/navigation";
+import RecentTransactions from "@/components/RecentTransactions";
 
 const Home = async () => {
     const user = await getLoggedInUser();
     if (!user) {
         redirect("/sign-in");
     }
+
+    const accounts = await getAccounts({ userId: user.$id });
 
     return (
         <section className="home">
@@ -18,17 +21,19 @@ const Home = async () => {
                         type="greeting"
                         title="Welcome"
                         subtext="Access and manage your account and transactions efficiently."
-                        user={user.name}
+                        user={`${user.firstName} ${user.lastName}`}
                     />
 
                     <TotalBalanceBox
-                        accounts={[]}
-                        totalBanks={1}
-                        totalCurrentBalance={146789}
+                        accounts={accounts.data}
+                        totalBanks={accounts.totalBanks}
+                        totalCurrentBalance={accounts.totalCurrentBalance}
                     />
                 </header>
+
+                <RecentTransactions accounts={accounts.data} user={user} />
             </div>
-            <RightSideBar name={user.name} email={user.email}/>
+            <RightSideBar user={user} />
         </section>
     );
 }
