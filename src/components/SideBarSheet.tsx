@@ -38,7 +38,7 @@ const SideBarSheet = ({ user } : { user : User }) => {
                     </div>
                 </div>
 
-                <SideBarFooter user={user} />
+                <SideBarFooter user={user} type="mobile" />
             </SheetContent>
         </Sheet>
     )

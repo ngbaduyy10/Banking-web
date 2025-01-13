@@ -332,7 +332,7 @@
 
   /* Footer */
   .footer {
-    @apply flex cursor-pointer items-center justify-between gap-2 py-2;
+    @apply flex cursor-pointer items-center justify-center xl:justify-between gap-2 py-2;
   }
 
   .footer_name {

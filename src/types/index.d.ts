@@ -282,9 +282,7 @@ declare interface CreateFundingSourceOptions {
 declare interface CreateTransactionProps {
     name: string;
     amount: string;
-    senderId: string;
     senderBankId: string;
-    receiverId: string;
     receiverBankId: string;
     email: string;
 }
@@ -326,4 +324,12 @@ declare interface getBankProps {
 
 declare interface getBankByAccountIdProps {
     accountId: string;
+}
+
+declare interface TransferFormValues {
+    email: string;
+    name: string;
+    amount: string;
+    senderBank: string;
+    shareableId: string;
 }

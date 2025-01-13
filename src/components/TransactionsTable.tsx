@@ -2,85 +2,54 @@ import {
     Table,
     TableBody,
     TableCell,
-    TableFooter,
     TableHead,
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-
-const invoices = [
-    {
-        invoice: "INV001",
-        paymentStatus: "Paid",
-        totalAmount: "$250.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV002",
-        paymentStatus: "Pending",
-        totalAmount: "$150.00",
-        paymentMethod: "PayPal",
-    },
-    {
-        invoice: "INV003",
-        paymentStatus: "Unpaid",
-        totalAmount: "$350.00",
-        paymentMethod: "Bank Transfer",
-    },
-    {
-        invoice: "INV004",
-        paymentStatus: "Paid",
-        totalAmount: "$450.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV005",
-        paymentStatus: "Paid",
-        totalAmount: "$550.00",
-        paymentMethod: "PayPal",
-    },
-    {
-        invoice: "INV006",
-        paymentStatus: "Pending",
-        totalAmount: "$200.00",
-        paymentMethod: "Bank Transfer",
-    },
-    {
-        invoice: "INV007",
-        paymentStatus: "Unpaid",
-        totalAmount: "$300.00",
-        paymentMethod: "Credit Card",
-    },
-]
-
+import {formatAmount, formatDateTime} from "@/lib/utils";
 const TransactionsTable = ({ transactions } : { transactions : Transaction[]}) => {
     return (
-        <Table>
-            <TableHeader>
-                <TableRow>
-                    <TableHead className="w-[100px]">Invoice</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Method</TableHead>
-                    <TableHead className="text-right">Amount</TableHead>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-                {invoices.map((invoice) => (
-                    <TableRow key={invoice.invoice}>
-                        <TableCell className="font-medium">{invoice.invoice}</TableCell>
-                        <TableCell>{invoice.paymentStatus}</TableCell>
-                        <TableCell>{invoice.paymentMethod}</TableCell>
-                        <TableCell className="text-right">{invoice.totalAmount}</TableCell>
+    <Table>
+        <TableHeader>
+            <TableRow>
+                <TableHead className="px-2">Transaction</TableHead>
+                <TableHead className="px-2">Amount</TableHead>
+                <TableHead className="px-2">Date</TableHead>
+            </TableRow>
+        </TableHeader>
+        <TableBody>
+            {transactions.map((t: Transaction) => {
+                const amount = formatAmount(t.amount)
+
+                const isDebit = t.type === 'debit';
+                const isCredit = t.type === 'credit';
+
+                return (
+                    <TableRow key={t.id} className={`${isDebit || amount[0] === '-' ? 'bg-[#FFFBFA]' : 'bg-[#F6FEF9]'} !over:bg-none`}>
+                        <TableCell className="max-w-[250px] pl-2 pr-10">
+                            <div className="flex items-center gap-3">
+                                <h1 className="text-14 truncate font-semibold text-[#344054]">
+                                    {t.name}
+                                </h1>
+                            </div>
+                        </TableCell>
+
+                        <TableCell className={`pl-2 pr-10 font-semibold ${
+                            isDebit || amount[0] === '-' ?
+                                'text-[#f04438]'
+                                : 'text-[#039855]'
+                        }`}>
+                            {isDebit ? `-${amount}` : isCredit ? amount : amount}
+                        </TableCell>
+
+                        <TableCell className="min-w-32 pl-2 pr-10">
+                            {formatDateTime(new Date(t.date)).dateTime}
+                        </TableCell>
                     </TableRow>
-                ))}
-            </TableBody>
-            <TableFooter>
-                <TableRow>
-                    <TableCell colSpan={3}>Total</TableCell>
-                    <TableCell className="text-right">$2,500.00</TableCell>
-                </TableRow>
-            </TableFooter>
-        </Table>
+                )
+            })}
+        </TableBody>
+    </Table>
     )
 }
 

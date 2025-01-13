@@ -216,7 +216,7 @@ export const getBank = async ({ documentId }: { documentId : string}) => {
     }
 }
 
-export const getBankByAccountId = async ({ accountId }: { accountId : string}) => {
+export const getBankByAccountId = async (accountId : string) => {
     try {
         const { database } = await createAdminClient();
 

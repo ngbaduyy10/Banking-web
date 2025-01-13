@@ -26,7 +26,7 @@ const SideBar = ({ user } : { user : User }) => {
                 })}
             </div>
 
-            <SideBarFooter user={user} />
+            <SideBarFooter user={user} type="desktop" />
         </section>
     )
 }
